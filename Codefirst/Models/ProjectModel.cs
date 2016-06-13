@@ -11,5 +11,8 @@ namespace Codefirst.Models {
         [Required]
         public string NameProject { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
+      public  Project() {
+            List<Task> Tasks = new List<Task>();
+        }
     }
 }

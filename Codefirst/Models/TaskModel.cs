@@ -18,6 +18,9 @@ namespace Codefirst.Models {
         public int ProjectId { get; set; }
         public Project Project { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
+        public Task() {
+            List<Tag> Tags = new List<Tag>();
+        }
         
     }
 }

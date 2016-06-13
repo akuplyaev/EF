@@ -9,6 +9,9 @@ namespace Codefirst.Models {
         [MaxLength(400)]
         [Required]
         public string NameTag { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }        
+        public virtual ICollection<Task> Tasks { get; set; }
+        public Tag() {
+            List<Task> Tasks = new List<Task>();
+        }        
     }
 }
