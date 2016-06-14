@@ -12,7 +12,7 @@
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Tag> Tags { get; set; }
     }
-    public class DbInitializer : DropCreateDatabaseAlways<ProjectContext> {
+    public class DbInitializer : DropCreateDatabaseIfModelChanges<ProjectContext> {
         protected override void Seed(ProjectContext db) {
             Project pr1 = new Project() { NameProject = "test1" };
             Project pr2 = new Project() { NameProject = "test2" };
