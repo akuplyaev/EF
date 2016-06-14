@@ -13,13 +13,19 @@ namespace Codefirst.Controllers {
         ProjectContext db = new ProjectContext();
         // GET: api/Tasks
         public IEnumerable GetGrouped() {
-
+            //имя срок общее количество задач для срока
             //string query = "Select Projects.NameProject,Tasks.Deadline,temp.counttasks from (Select Deadline,Count(GuidId) as counttasks   from Tasks group by Deadline) temp INNER JOIN Tasks on temp.Deadline=Tasks.Deadline INNER JOIN Projects on Projects.Id=Tasks.ProjectId order by NameProject";
             var res1 = from tasks in db.Tasks
                        group tasks by tasks.Deadline into temp
                        join task in db.Tasks on temp.Key equals task.Deadline into jo
                        from rr in jo.DefaultIfEmpty()
                        select new { name = rr.Project.NameProject, deadline = rr.Deadline, counttasks = jo.Count() };
+            // имя проекта срок количество задач для проекта с таким сроком
+            var res2 = from tasks in db.Tasks
+                       join projects in db.Projects on tasks.ProjectId equals projects.Id into jo
+                       from   re  in jo.DefaultIfEmpty()                 
+                       group new {  tasks, jo } by new { tasks.Deadline,re.NameProject } into temp
+                       select new { name =temp.Key.NameProject,dealine=temp.Key.Deadline ,counttask=temp.Count()};
 
             return res1;
         }
