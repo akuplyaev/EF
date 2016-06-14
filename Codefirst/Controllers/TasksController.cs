@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,7 +23,29 @@ namespace Codefirst.Controllers {
 
             return res1;
         }
-
-
+        // POST: api/Tasks
+        public int Post([FromBody]Task task) {
+            db.Tasks.Add(task);
+            db.SaveChanges();          
+            return task.GuidId;
+        }
+        // PUT: api/Tasks
+        public int Put(int id,[FromBody]Task task) {
+            var entity = db.Tasks.Find(id);
+           
+            db.SaveChanges();
+            if (entity != null) {
+                entity.Title = task.Title;
+                entity.Deadline = task.Deadline;
+                entity.Mark = task.Mark;
+                entity.Description = task.Description;
+                entity.ProjectId = task.ProjectId;                
+                db.SaveChanges();
+                return 1;
+            }
+            else {
+                return 0;
+            }            
+        }
     }
 }
