@@ -25,9 +25,9 @@ namespace Codefirst.Controllers {
                        join projects in db.Projects on tasks.ProjectId equals projects.Id into jo
                        from   re  in jo.DefaultIfEmpty()                 
                        group new {  tasks, jo } by new { tasks.Deadline,re.NameProject } into temp
-                       select new { name =temp.Key.NameProject,dealine=temp.Key.Deadline ,counttask=temp.Count()};
+                       select new { name =temp.Key.NameProject,dealine=temp.Key.Deadline, counttask=temp.Count()};
 
-            return res1;
+            return res2;
         }
         // POST: api/Tasks
         public int Post([FromBody]Task task) {

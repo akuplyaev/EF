@@ -11,16 +11,20 @@ namespace Codefirst.Controllers {
 
         
         public async Task<IHttpActionResult> Get() {
-            var project = await (from b in db.Projects                            
-                             select b.NameProject).ToListAsync();
-            var task = await (from b in db.Tasks
-                                 select b.Title).ToListAsync();
-
-            return Ok(task);
+            //var project = await (from b in db.Projects                            
+            //                 select b.NameProject).ToListAsync();
+            //var task = await (from b in db.Tasks
+            //                     select b.Title).ToListAsync();
+            var projecttasks = await (from projeect in db.Projects
+                            join
+                            tasks in db.Tasks on projeect.Id equals tasks.ProjectId
+                            select new { Name = projeect.NameProject, tasks.Title }).ToListAsync();
+            
+            return Ok(projecttasks);
         }
 
         
-        [Route("api/project/simple")]
+        [Route("api/projects/simple")]
         public IQueryable GetSimple() {
             var res = from projects in db.Projects
                       join tasks in db.Tasks on projects equals tasks.Project
