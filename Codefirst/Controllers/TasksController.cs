@@ -37,15 +37,16 @@ namespace Codefirst.Controllers {
         }
         // PUT: api/Tasks
         public int Put(int id,[FromBody]Task task) {
-            var entity = db.Tasks.Find(id);
-           
-            db.SaveChanges();
+            var entity = db.Tasks.Find(id);                    
             if (entity != null) {
-                entity.Title = task.Title;
-                entity.Deadline = task.Deadline;
-                entity.Mark = task.Mark;
-                entity.Description = task.Description;
-                entity.ProjectId = task.ProjectId;                
+             //   db.Tasks.Attach(entity);
+                db.Entry(entity).State = EntityState.Modified;
+                db.Entry(entity).CurrentValues.SetValues(task);                            
+                //entity.Title = task.Title;
+                //entity.Deadline = task.Deadline;
+                //entity.Mark = task.Mark;
+                //entity.Description = task.Description;
+                //entity.ProjectId = task.ProjectId;                
                 db.SaveChanges();
                 return 1;
             }
