@@ -2,16 +2,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Codefirst.Models {
-    public class Tag {
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        [MaxLength(400)]
-        [Required]
+namespace Codefirst.Models
+{
+    public class Tag
+    {
+        [Key]
+        public int Id { get; set; }
+       
+        [Index(IsUnique = true),Required,MaxLength(400)]
         public string NameTag { get; set; }
+
         public virtual ICollection<Task> Tasks { get; set; }
-        public Tag() {
+
+        public Tag()
+        {
             List<Task> Tasks = new List<Task>();
-        }        
+        }
     }
 }

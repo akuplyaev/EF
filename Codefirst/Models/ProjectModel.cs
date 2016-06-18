@@ -2,16 +2,20 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Codefirst.Models {
-    public class Project {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+namespace Codefirst.Models
+{
+    public class Project
+    {
+        [Key]       
         public int Id { get; set; }
-        [MaxLength(400)]
-        [Required]
+        
+        [Required, MaxLength(400)]
         public string NameProject { get; set; }
+
         public virtual ICollection<Task> Tasks { get; set; }
-      public  Project() {
+
+        public Project()
+        {
             List<Task> Tasks = new List<Task>();
         }
     }
