@@ -25,9 +25,9 @@ namespace Codefirst.Controllers {
                        join projects in db.Projects on tasks.ProjectId equals projects.Id into jo
                        from   re  in jo.DefaultIfEmpty()                 
                        group new {  tasks, jo } by new { tasks.Deadline,re.NameProject } into temp
-                       select new { name =temp.Key.NameProject,dealine=temp.Key.Deadline, counttask=temp.Count()};
+                       select new { name =temp.Key.NameProject,dealine=temp.Key.Deadline ,counttask=temp.Count()};
 
-            return res2;
+            return res1;
         }
         // POST: api/Tasks
         public int Post([FromBody]Task task) {
@@ -39,14 +39,13 @@ namespace Codefirst.Controllers {
         public int Put(int id,[FromBody]Task task) {
             var entity = db.Tasks.Find(id);                    
             if (entity != null) {
-             //   db.Tasks.Attach(entity);
+                db.Tasks.Attach(entity);
+                entity.Title = task.Title;
+                entity.Deadline = task.Deadline;
+                entity.Mark = task.Mark;
+                entity.Description = task.Description;
+                entity.ProjectId = task.ProjectId;   
                 db.Entry(entity).State = EntityState.Modified;
-                db.Entry(entity).CurrentValues.SetValues(task);                            
-                //entity.Title = task.Title;
-                //entity.Deadline = task.Deadline;
-                //entity.Mark = task.Mark;
-                //entity.Description = task.Description;
-                //entity.ProjectId = task.ProjectId;                
                 db.SaveChanges();
                 return 1;
             }
