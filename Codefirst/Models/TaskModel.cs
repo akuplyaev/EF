@@ -9,7 +9,8 @@ namespace Codefirst.Models
         [Key]
         public int Id { get; set; }
        
-        [Required,MaxLength(400)]
+        [Required]
+        [MaxLength(400)]
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -18,10 +19,10 @@ namespace Codefirst.Models
         public bool Mark { get; set; }
 
         public DateTime? Deadline { get; set; }
-
         
         public int ProjectId { get; set; }
-        [ForeignKey("ProjectId")]
+
+        [ForeignKey("ProjectId")]     
         public Project Project { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }

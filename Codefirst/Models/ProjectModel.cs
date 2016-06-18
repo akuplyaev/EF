@@ -9,7 +9,8 @@ namespace Codefirst.Models
         [Key]       
         public int Id { get; set; }
         
-        [Required, MaxLength(400)]
+        [Required]
+        [MaxLength(400)]
         public string NameProject { get; set; }
 
         public virtual ICollection<Task> Tasks { get; set; }

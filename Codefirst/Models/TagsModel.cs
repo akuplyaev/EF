@@ -8,8 +8,9 @@ namespace Codefirst.Models
     {
         [Key]
         public int Id { get; set; }
-       
-        [Index(IsUnique = true),Required,MaxLength(400)]
+        [Required]
+        [Index(IsUnique = true)]
+        [MaxLength(400)]
         public string NameTag { get; set; }
 
         public virtual ICollection<Task> Tasks { get; set; }
