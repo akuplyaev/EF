@@ -42,12 +42,12 @@
             Task t4 = new Task() { Title = "task4", Deadline = DateTime.Now, Mark = true, Project = pr3 };
             Task t5 = new Task() { Title = "task5", Deadline = DateTime.Now, Mark = true, Project = pr3 };
             Task t6 = new Task() { Title = "task6", Deadline = DateTime.Now, Mark = true, Project = pr3 };
-            Tag tag1 = new Tag { NameTag = "tag1", Tasks = new List<Task> { t2, t3, t6 } };
-            Tag tag2 = new Tag { NameTag = "tag2", Tasks = new List<Task> { t3 } };
-            Tag tag3 = new Tag { NameTag = "tag3", Tasks = new List<Task> { t1, t2, t3, t5, t6 } };
-            db.Projects.AddRange(new List<Project> { pr1, pr2, pr3 });
-            db.Tasks.AddRange(new List<Task> { t1, t2, t3, t4, t5, t6 });
-            db.Tags.AddRange(new List<Tag> { tag1, tag2, tag3 });
+            Tag tag1 = new Tag { NameTag = "tag1", Tasks = new HashSet<Task> { t2, t3, t6 } };
+            Tag tag2 = new Tag { NameTag = "tag2", Tasks = new HashSet<Task> { t3 } };
+            Tag tag3 = new Tag { NameTag = "tag3", Tasks = new HashSet<Task> { t1, t2, t3, t5, t6 } };
+            db.Projects.AddRange(new HashSet<Project> { pr1, pr2, pr3 });
+            db.Tasks.AddRange(new HashSet<Task> { t1, t2, t3, t4, t5, t6 });
+            db.Tags.AddRange(new HashSet<Tag> { tag1, tag2, tag3 });
             db.SaveChanges();
             base.Seed(db);
         }
