@@ -13,11 +13,7 @@ namespace Codefirst.Controllers
 
 
         public async Task<IHttpActionResult> Get()
-        {
-            //var project = await (from b in db.Projects                            
-            //                 select b.NameProject).ToListAsync();
-            //var task = await (from b in db.Tasks
-            //                     select b.Title).ToListAsync();
+        {            
             var projecttasks = await (from task in db.Tasks
                                       select new { Name = task.Project.NameProject, Tasks = task.Title }).ToListAsync();
             return Ok(projecttasks);
@@ -29,7 +25,7 @@ namespace Codefirst.Controllers
         {         
             var res = from task in db.Tasks
                        group task by task.Project.NameProject into g 
-                       select new { Name =g.Key , countTask = g.Count() };
+                       select new { ProjectName =g.Key , TaskCount = g.Count() };            
             return res;
         }
 
