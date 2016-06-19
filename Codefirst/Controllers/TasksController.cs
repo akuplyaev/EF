@@ -37,7 +37,7 @@ namespace Codefirst.Controllers
         {
             db.Tasks.Add(task);
             db.SaveChanges();
-            return task.Id;
+            return task.TaskId;
         }
         // PUT: api/Tasks
         public int Put(int id, [FromBody]Task task)

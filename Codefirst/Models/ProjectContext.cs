@@ -11,9 +11,23 @@
             : base("name=ProjectContext")
         {
         }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<Task> Tasks { get; set; }
-        public DbSet<Tag> Tags { get; set; }
+        public  DbSet<Project> Projects { get; set; }
+        public  DbSet<Task> Tasks { get; set; }
+        public  DbSet<Tag> Tags { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Task>()
+                .HasMany(task=>task.Tags).
+                WithMany(tag=>tag.Tasks).
+                Map( m=>
+                {                   
+                    m.MapLeftKey("TaskId");
+                    m.MapRightKey("TagId");
+                    m.ToTable("TaskTag");
+                });
+            
+        }
     }
     public class DbInitializer : DropCreateDatabaseIfModelChanges<ProjectContext>
     {

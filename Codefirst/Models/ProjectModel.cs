@@ -17,7 +17,7 @@ namespace Codefirst.Models
 
         public Project()
         {
-            List<Task> Tasks = new List<Task>();
+            Tasks = new HashSet<Task>();
         }
     }
 }

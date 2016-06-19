@@ -7,8 +7,8 @@ namespace Codefirst.Models
     public class Task
     {
         [Key]
-        public int Id { get; set; }
-       
+        public int TaskId { get; set; } 
+             
         [Required]
         [MaxLength(400)]
         public string Title { get; set; }
@@ -29,7 +29,7 @@ namespace Codefirst.Models
 
         public Task()
         {
-            List<Tag> Tags = new List<Tag>();
+            Tags = new HashSet<Tag>();
         }
 
     }

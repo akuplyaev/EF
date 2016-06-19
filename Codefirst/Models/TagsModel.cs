@@ -7,7 +7,8 @@ namespace Codefirst.Models
     public class Tag
     {
         [Key]
-        public int Id { get; set; }
+        public int TagId { get; set; }
+
         [Required]
         [Index(IsUnique = true)]
         [MaxLength(400)]
@@ -17,7 +18,7 @@ namespace Codefirst.Models
 
         public Tag()
         {
-            List<Task> Tasks = new List<Task>();
+             Tasks = new HashSet<Task>();
         }
     }
 }
