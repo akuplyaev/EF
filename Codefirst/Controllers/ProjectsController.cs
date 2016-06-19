@@ -19,28 +19,17 @@ namespace Codefirst.Controllers
             //var task = await (from b in db.Tasks
             //                     select b.Title).ToListAsync();
             var projecttasks = await (from task in db.Tasks
-
                                       select new { Name = task.Project.NameProject, Tasks = task.Title }).ToListAsync();
-
             return Ok(projecttasks);
         }
 
 
         [Route("api/projects/simple")]
         public IQueryable GetSimple()
-        {
-            var res = db.Tasks.Select(p => new
-            {
-                Name = p.Title,
-
-                Company = p.Project.NameProject
-            });
-
-
-
-            var res1 = from projects in db.Projects
-                       group projects by projects.Tasks into g
-                       select new { Name = g.Key, countTask = g.Count() };
+        {         
+            var res = from task in db.Tasks
+                       group task by task.Project.NameProject into g 
+                       select new { Name =g.Key , countTask = g.Count() };
             return res;
         }
 

@@ -19,13 +19,13 @@
         {
             modelBuilder.Entity<Task>()
                 .HasMany(task=>task.Tags).
-                WithMany(tag=>tag.Tasks).
-                Map( m=>
-                {                   
+                 WithMany(tag=>tag.Tasks).
+                 Map( m=>
+                 {                   
                     m.MapLeftKey("TaskId");
                     m.MapRightKey("TagId");
                     m.ToTable("TaskTag");
-                });
+                 });
             
         }
     }

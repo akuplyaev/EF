@@ -40,7 +40,7 @@ namespace Codefirst.Controllers
             return task.TaskId;
         }
         // PUT: api/Tasks
-        public int Put(int id, [FromBody]Task task)
+        public bool Put(int id, [FromBody]Task task)
         {
             var entity = db.Tasks.Find(id);
             db.SaveChanges();
@@ -52,11 +52,11 @@ namespace Codefirst.Controllers
                 entity.Description = task.Description;
                 entity.ProjectId = task.ProjectId;
                 db.SaveChanges();
-                return 1;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
     }
