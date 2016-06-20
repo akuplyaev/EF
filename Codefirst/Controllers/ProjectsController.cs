@@ -13,11 +13,7 @@ namespace Codefirst.Controllers
 
 
         public async Task<IHttpActionResult> Get()
-        {
-            //var project = await (from b in db.Projects                            
-            //                 select b.NameProject).ToListAsync();
-            //var task = await (from b in db.Tasks
-            //                     select b.Title).ToListAsync();
+        {           
             var projecttasks = await (from task in db.Tasks
 
                                       select new { Name = task.Project.NameProject, Tasks = task.Title }).ToListAsync();
