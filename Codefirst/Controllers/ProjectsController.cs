@@ -23,9 +23,8 @@ namespace Codefirst.Controllers
         [Route("api/projects/simple")]
         public IQueryable GetSimple()
         {         
-            var res = from task in db.Tasks
-                       group task by task.Project.NameProject into g 
-                       select new { ProjectName =g.Key , TaskCount = g.Count() };            
+            var res = from projects in db.Projects                       
+                       select new { ProjectName =projects.NameProject , TaskCount = projects.Tasks.Count };            
             return res;
         }
 
