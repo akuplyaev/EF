@@ -7,16 +7,18 @@ namespace Codefirst.Models
     public class Tag
     {
         [Key]
-        public int Id { get; set; }
-       
-        [Index(IsUnique = true),Required,MaxLength(400)]
+        public int TagId { get; set; }
+
+        [Required]
+        [Index(IsUnique = true)]
+        [MaxLength(400)]
         public string NameTag { get; set; }
 
         public virtual ICollection<Task> Tasks { get; set; }
 
         public Tag()
         {
-            List<Task> Tasks = new List<Task>();
+             Tasks = new HashSet<Task>();
         }
     }
 }
